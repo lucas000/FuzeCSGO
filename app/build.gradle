@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.fuze.csgo"
-        minSdk 19
+        minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -54,7 +54,7 @@ dependencies {
 
     def retrofit_version = "2.9.0"
     def interceptor_version = "4.9.1"
-    def lifecycle_version = "2.4.0-alpha02"
+    def lifecycle_version = "2.4.0"
     def coroutine_version = "1.3.9"
     def glide_version = "4.12.0"
 

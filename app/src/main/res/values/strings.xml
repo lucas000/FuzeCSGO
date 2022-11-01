@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FuzeCSGO</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_matches">Partidas</string>
+    <string name="text_vs">vs</string>
+    <string name="text_now">Agora</string>
+    <string name="text_today">Hoje</string>
+
 </resources>

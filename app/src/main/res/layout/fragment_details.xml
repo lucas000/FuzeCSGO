@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_item"
+    tools:context=".ui.fragment.DetailsFragment">
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="14dp"
+        android:layout_height="0dp"
+        android:src="?android:attr/homeAsUpIndicator"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_league_serie"
+        app:layout_constraintEnd_toStartOf="@+id/txt_vs"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_league_serie"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_league_serie"
+        style="@style/csgo_details_matche_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Liga Arroz" />
+
+    <TextView
+        android:id="@+id/txt_team_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/csgo_team_name"
+        tools:text="Time 1"
+        app:layout_constraintEnd_toEndOf="@+id/img_team_one"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/img_team_one"
+        app:layout_constraintTop_toBottomOf="@+id/img_team_one" />
+
+    <TextView
+        android:id="@+id/txt_team_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/csgo_team_name"
+        tools:text="Time 2"
+        app:layout_constraintEnd_toEndOf="@+id/img_team_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/img_team_two"
+        app:layout_constraintTop_toBottomOf="@+id/img_team_two" />
+
+    <TextView
+        android:id="@+id/txt_vs"
+        style="@style/csgo_vs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_vs"
+        app:layout_constraintBottom_toBottomOf="@+id/img_team_one"
+        app:layout_constraintEnd_toStartOf="@+id/img_team_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_team_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.849" />
+
+    <ImageView
+        android:id="@+id/img_team_one"
+        android:layout_width="53dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintEnd_toStartOf="@+id/txt_vs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_league_serie"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/img_team_two"
+        android:layout_width="53dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_vs"
+        app:layout_constraintTop_toBottomOf="@+id/txt_league_serie"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txt_time_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Hoje, 20:00"
+        style="@style/csgo_details_matche_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_team_one" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_matches_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_time_match"
+        tools:listitem="@layout/players_item" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
