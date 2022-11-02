@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.fuze.csgo.R
 import com.fuze.csgo.model.team.PlayerResponse
 
-class AdapterPlayers: RecyclerView.Adapter<AdapterPlayers.MatchViewHolder>() {
+class AdapterPlayersTeamOne: RecyclerView.Adapter<AdapterPlayersTeamOne.MatchViewHolder>() {
 
     var items: MutableList<PlayerResponse> = mutableListOf()
         set(value) {
@@ -34,7 +34,7 @@ class AdapterPlayers: RecyclerView.Adapter<AdapterPlayers.MatchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.players_item, parent, false)
+                .inflate(R.layout.players_one_item, parent, false)
         )
     }
 

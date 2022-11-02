@@ -1,14 +1,17 @@
 package com.fuze.csgo.ui.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fuze.csgo.R
 import com.fuze.csgo.model.match.MatchResponse
+import com.fuze.csgo.other.Utils
 
 class AdapterMatches(
     private val onItemClickListener: (MatchResponse) -> Unit
@@ -28,6 +31,7 @@ class AdapterMatches(
         private val imgTeamTwo: ImageView = itemView.findViewById(R.id.img_team_two)
         private val imgLeague: ImageView = itemView.findViewById(R.id.img_league)
         private val league: TextView = itemView.findViewById(R.id.txt_league)
+        private val date: TextView = itemView.findViewById(R.id.txt_date_match)
 
         fun bind(item: MatchResponse, onItemClickListener: (MatchResponse) -> Unit) {
             teamOne.text = item.opponents?.get(0)?.opponent?.name
@@ -39,11 +43,35 @@ class AdapterMatches(
             Glide.with(imgLeague).load(item.league?.image_url).into(imgLeague)
             league.text = "${item.league?.name + ' ' +  item.serie?.name}"
 
+            when(item.status) {
+                "not_started" -> {
+                    var textDrawable: Drawable? = date.background
+                    textDrawable = DrawableCompat.wrap(textDrawable!!)
+                    DrawableCompat.setTint(textDrawable, R.color.background_grey)
+                    date.background = textDrawable
+                    date.text = Utils.getDateTime(item.scheduled_at!!)
+                }
+                "running" -> {
+                    var textDrawable: Drawable? = date.background
+                    textDrawable = DrawableCompat.wrap(textDrawable!!)
+                    DrawableCompat.setTint(textDrawable, R.color.background_red)
+                    date.background = textDrawable
+                    date.text = "AGORA"
+                }
+                "started" -> {
+                    var textDrawable: Drawable? = date.background
+                    textDrawable = DrawableCompat.wrap(textDrawable!!)
+                    DrawableCompat.setTint(textDrawable, R.color.background_red)
+                    date.background = textDrawable
+                    date.text = "AGORA"
+                }
+            }
             itemView.setOnClickListener {
                 onItemClickListener.invoke(item)
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(

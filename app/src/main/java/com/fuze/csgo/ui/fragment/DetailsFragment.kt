@@ -13,7 +13,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.fuze.csgo.other.Status
-import com.fuze.csgo.ui.adapter.AdapterPlayers
+import com.fuze.csgo.other.Utils
+import com.fuze.csgo.ui.adapter.AdapterPlayersTeamOne
+import com.fuze.csgo.ui.adapter.AdapterPlayersTeamTwo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 
@@ -21,8 +23,8 @@ class DetailsFragment : Fragment() {
 
     private var binding: FragmentDetailsBinding? = null
     lateinit var viewModel: FuzeViewModel
-    private val adapterPlayerOne: AdapterPlayers by lazy { AdapterPlayers() }
-    private val adapterPlayerTwo: AdapterPlayers by lazy { AdapterPlayers() }
+    private val adapterPlayerOne: AdapterPlayersTeamOne by lazy { AdapterPlayersTeamOne() }
+    private val adapterPlayerTwo: AdapterPlayersTeamTwo by lazy { AdapterPlayersTeamTwo() }
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -59,6 +61,11 @@ class DetailsFragment : Fragment() {
                 Glide.with(img_team_two).load(match.opponents?.get(1)?.opponent?.image_url).into(img_team_two)
             }
 
+            when(args.matchItem.status) {
+                "not_started" -> { txtTimeMatch.text = Utils.getDateTime(args.matchItem.scheduled_at!!)}
+                "running" -> { txtTimeMatch.text = "AGORA" }
+            }
+
             imgBack.setOnClickListener {
                 activity?.onBackPressed()
             }
@@ -72,18 +79,21 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setupToObservers() {
-        viewModel?.teams?.observe(viewLifecycleOwner) {
+        viewModel.teams.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { result ->
                 when(result.status) {
                     Status.SUCCESS -> {
                         adapterPlayerOne?.items = result.data?.get(0)?.players!!.toMutableList()
                         adapterPlayerTwo?.items = result.data?.get(1)!!.players!!.toMutableList()
+                        binding?.pgrBar?.visibility = View.GONE
                     }
 
                     Status.ERROR -> {
                         Snackbar.make(binding!!.root, getString(R.string.app_name), Snackbar.LENGTH_LONG).show()
                     }
-                    Status.LOADING -> { }
+                    Status.LOADING -> {
+                        binding?.pgrBar?.visibility = View.VISIBLE
+                    }
                 }
             }
         }

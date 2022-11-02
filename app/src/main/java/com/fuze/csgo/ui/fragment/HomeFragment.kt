@@ -49,17 +49,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupToObservers() {
-        viewModel?.matches?.observe(viewLifecycleOwner) {
+        viewModel?.matches.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { result ->
                 when(result.status) {
                     Status.SUCCESS -> {
-                        adapter?.items = result.data!!.toMutableList()
+                        var monthList: List<MatchResponse> = result.data!!.filter { item -> item.opponents?.size == 2 }
+                        adapter?.items = monthList.toMutableList()
+                        binding?.pgrBar?.visibility = View.GONE
                     }
 
                     Status.ERROR -> {
                         Snackbar.make(binding!!.root, getString(R.string.app_name), Snackbar.LENGTH_LONG).show()
                     }
-                    Status.LOADING -> { }
+                    Status.LOADING -> {
+                        binding?.pgrBar?.visibility = View.VISIBLE
+                    }
                 }
             }
         }
