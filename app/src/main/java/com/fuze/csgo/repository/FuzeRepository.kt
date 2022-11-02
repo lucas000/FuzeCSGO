@@ -8,5 +8,5 @@ interface FuzeRepository {
 
     suspend fun getListMatches(): Resource<List<MatchResponse>>
 
-    suspend fun getTeamDetail(eventId: String): Resource<TeamResponse>
+    suspend fun getTeamDetail(teamOne: Long, teamTwo: Long): Resource<List<TeamResponse>>
 }

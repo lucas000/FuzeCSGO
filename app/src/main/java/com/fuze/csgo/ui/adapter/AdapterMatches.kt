@@ -30,14 +30,14 @@ class AdapterMatches(
         private val league: TextView = itemView.findViewById(R.id.txt_league)
 
         fun bind(item: MatchResponse, onItemClickListener: (MatchResponse) -> Unit) {
-            teamOne.text = item.opponents?.get(0)?.name
-            Glide.with(imgTeamOne).load(item.opponents?.get(0)?.image_url).into(imgTeamOne)
+            teamOne.text = item.opponents?.get(0)?.opponent?.name
+            Glide.with(imgTeamOne).load(item.opponents?.get(0)?.opponent?.image_url).into(imgTeamOne)
 
-            teamTwo.text = item.opponents?.get(1)?.name
-            Glide.with(imgTeamTwo).load(item.opponents?.get(1)?.image_url).into(imgTeamTwo)
+            teamTwo.text = item.opponents?.get(1)?.opponent?.name
+            Glide.with(imgTeamTwo).load(item.opponents?.get(1)?.opponent?.image_url).into(imgTeamTwo)
 
-            Glide.with(imgLeague).load(item.opponents?.get(1)?.image_url).into(imgLeague)
-            league.text = item.league?.name + item.serie?.name
+            Glide.with(imgLeague).load(item.league?.image_url).into(imgLeague)
+            league.text = "${item.league?.name + ' ' +  item.serie?.name}"
 
             itemView.setOnClickListener {
                 onItemClickListener.invoke(item)

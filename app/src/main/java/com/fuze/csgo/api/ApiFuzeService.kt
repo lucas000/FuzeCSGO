@@ -7,9 +7,9 @@ import retrofit2.http.*
 
 interface ApiFuzeService {
 
-    @GET("matches/")
+    @GET("csgo/matches/")
     suspend fun getListMatches(): Response<List<MatchResponse>>
 
     @GET("teams/{id}")
-    suspend fun getTeamDetail(@Path("id") id: String): Response<TeamResponse>
+    suspend fun getTeamDetail(@Path("id") id: Long): Response<TeamResponse>
 }

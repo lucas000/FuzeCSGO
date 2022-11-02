@@ -10,7 +10,7 @@ data class MatchResponse (
     val league_id: Long?,
     val serie_id: Long?,
     val status: String?,
-    val opponents: List<OpponentResponse>?,
+    val opponents: List<OpponentList>?,
     val league: LeagueResponse?,
     val serie: SerieResponse?,
 ) : Serializable
