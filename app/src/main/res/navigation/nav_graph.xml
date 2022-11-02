@@ -18,5 +18,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.fuze.csgo.ui.fragment.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="matchItem"
+            app:argType="com.fuze.csgo.model.match.MatchResponse" />
+    </fragment>
 </navigation>
