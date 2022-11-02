@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.fuze.csgo"
@@ -64,6 +64,7 @@ dependencies {
     def coroutine_version = "1.3.9"
     def glide_version = "4.12.0"
     def dagger_version = "2.38.1"
+    def splah_screen_version = "1.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -71,6 +72,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    // Splash Screen
+    implementation "androidx.core:core-splashscreen:$splah_screen_version"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData

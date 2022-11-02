@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +16,12 @@ import com.fuze.csgo.other.Status
 import com.fuze.csgo.ui.adapter.AdapterMatches
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import androidx.fragment.app.activityViewModels
 
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
-    lateinit var viewModel: FuzeViewModel
+    private val viewModel: FuzeViewModel by activityViewModels()
     private val adapter: AdapterMatches by lazy { AdapterMatches(::onItemClickListener) }
 
     override fun onCreateView(
@@ -29,14 +29,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        viewModel = requireActivity().run {
-            ViewModelProvider(this)[FuzeViewModel::class.java]
-        }
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            vm = viewModel
             rvMatchesList.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
@@ -55,14 +54,14 @@ class HomeFragment : Fragment() {
                     Status.SUCCESS -> {
                         var monthList: List<MatchResponse> = result.data!!.filter { item -> item.opponents?.size == 2 }
                         adapter?.items = monthList.toMutableList()
-                        binding?.pgrBar?.visibility = View.GONE
+                        viewModel.setStateLoading(false)
                     }
 
                     Status.ERROR -> {
                         Snackbar.make(binding!!.root, getString(R.string.app_name), Snackbar.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        binding?.pgrBar?.visibility = View.VISIBLE
+                        viewModel.setStateLoading(true)
                     }
                 }
             }
@@ -75,8 +74,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     private fun onItemClickListener(item: MatchResponse) {
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
     }
-
 }

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.fuze.csgo.R
 import com.fuze.csgo.databinding.FragmentDetailsBinding
 import com.fuze.csgo.ui.FuzeViewModel
@@ -20,9 +20,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
-
     private var binding: FragmentDetailsBinding? = null
-    lateinit var viewModel: FuzeViewModel
+    private val viewModel: FuzeViewModel by activityViewModels()
     private val adapterPlayerOne: AdapterPlayersTeamOne by lazy { AdapterPlayersTeamOne() }
     private val adapterPlayerTwo: AdapterPlayersTeamTwo by lazy { AdapterPlayersTeamTwo() }
     private val args: DetailsFragmentArgs by navArgs()
@@ -32,9 +31,6 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        viewModel = requireActivity().run {
-            ViewModelProvider(this)[FuzeViewModel::class.java]
-        }
 
         return binding?.root
     }
@@ -43,6 +39,8 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            vm = viewModel
             rv_player_one.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
@@ -63,6 +61,7 @@ class DetailsFragment : Fragment() {
 
             when(args.matchItem.status) {
                 "not_started" -> { txtTimeMatch.text = Utils.getDateTime(args.matchItem.scheduled_at!!)}
+                "started" -> { txtTimeMatch.text = "AGORA" }
                 "running" -> { txtTimeMatch.text = "AGORA" }
             }
 
@@ -85,17 +84,22 @@ class DetailsFragment : Fragment() {
                     Status.SUCCESS -> {
                         adapterPlayerOne?.items = result.data?.get(0)?.players!!.toMutableList()
                         adapterPlayerTwo?.items = result.data?.get(1)!!.players!!.toMutableList()
-                        binding?.pgrBar?.visibility = View.GONE
+                        viewModel.setStateLoading(false)
                     }
 
                     Status.ERROR -> {
                         Snackbar.make(binding!!.root, getString(R.string.app_name), Snackbar.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        binding?.pgrBar?.visibility = View.VISIBLE
+                        viewModel.setStateLoading(true)
                     }
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

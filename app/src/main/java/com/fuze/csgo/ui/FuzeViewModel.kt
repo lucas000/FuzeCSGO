@@ -22,6 +22,13 @@ class FuzeViewModel @Inject constructor(
     private val _teams = MutableLiveData<Event<Resource<List<TeamResponse>>>>()
     var teams: LiveData<Event<Resource<List<TeamResponse>>>> = _teams
 
+    private val _showLoading = MutableLiveData(true)
+    var showLoading : LiveData<Boolean> = _showLoading
+
+    fun setStateLoading(showLoading: Boolean) {
+        _showLoading.value = showLoading
+    }
+
     fun getMatchesList() {
         _matches.value = Event(Resource.loading(null))
 
