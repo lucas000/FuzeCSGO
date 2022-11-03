@@ -54,7 +54,7 @@ class AdapterMatches(
                     setColorDate(date, "AGORA", R.color.background_red)
                 }
                 "finished" -> {
-                    setColorDate(date, "Cancelado", R.color.background_grey)
+                    setColorDate(date, "Finalizado", R.color.background_grey)
                 }
                 "canceled" -> {
                     setColorDate(date, "Cancelado", R.color.background_red)

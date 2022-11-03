@@ -64,6 +64,7 @@ class DetailsFragment : Fragment() {
                 "started" -> { txtTimeMatch.text = "AGORA" }
                 "running" -> { txtTimeMatch.text = "AGORA" }
                 "finished" -> { txtTimeMatch.text = "Encerrado" }
+                "canceled" -> { txtTimeMatch.text = "Cancelado" }
             }
 
             imgBack.setOnClickListener {
