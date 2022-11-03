@@ -7,41 +7,16 @@ import com.fuze.csgo.other.Resource
 
 class FakeFuzeRepository: FuzeRepository {
 
-    private val opponents = listOf(
-        OpponentList(
-            OpponentResponse(
-                212,
-                "url",
-                "123"
-            )
-        )
-    )
+    private val opponents = listOf(OpponentList(OpponentResponse(212, "url", "123")))
 
     private val leagues = LeagueResponse(212, "url", "123")
     private val series = SerieResponse(212, "url")
     private val matchesList = mutableListOf(
-        MatchResponse(
-        12344,
-        "",
-        1234,
-        "name",
-        2334,
-        12334,
-        "started",
-        opponents,
-        leagues,
-        series
-        )
-    )
+        MatchResponse(12344, "", 1234, "name",2334,12334,
+            "started", opponents, leagues, series))
 
     private val players = listOf(
-        PlayerResponse(
-        123123,
-        "name",
-        "first name",
-        "last name",
-        "img url")
-    )
+        PlayerResponse(123123, "name","first name", "last name", "img url"))
 
     private val teams = listOf(
         TeamResponse(123123, "desc1", "1534784400000", players),

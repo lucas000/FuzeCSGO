@@ -30,7 +30,7 @@ class Utils {
                 var dateMonth = Date(yearMatch, monthMatch, dayMatch)
 
                 if(dayNow == dayMatch && monthNow == monthMatch && yearNow == yearMatch) {
-                    newDate = "Hoje, $${date.substring(11, 13) + ":" + date.substring(14, 16)}"
+                    newDate = "Hoje, ${date.substring(11, 13) + ":" + date.substring(14, 16)}"
                 } else if (dayMatch > dayNow && monthNow == monthMatch && yearNow == yearMatch) {
                     val formatDayWeek = SimpleDateFormat("E", brazilian)
                     val finalDay: String = formatDayWeek.format(dateMonth)

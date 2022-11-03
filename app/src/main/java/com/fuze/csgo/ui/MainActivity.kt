@@ -1,9 +1,10 @@
-package com.fuze.csgo
+package com.fuze.csgo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.fuze.csgo.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
     private var binding: FragmentDetailsBinding? = null
-    private val viewModel: FuzeViewModel by activityViewModels()
+    val viewModel: FuzeViewModel by activityViewModels()
     private val adapterPlayerOne: AdapterPlayersTeamOne by lazy { AdapterPlayersTeamOne() }
     private val adapterPlayerTwo: AdapterPlayersTeamTwo by lazy { AdapterPlayersTeamTwo() }
     private val args: DetailsFragmentArgs by navArgs()

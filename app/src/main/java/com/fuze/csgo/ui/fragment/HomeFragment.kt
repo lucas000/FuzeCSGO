@@ -21,7 +21,7 @@ import androidx.fragment.app.activityViewModels
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
-    private val viewModel: FuzeViewModel by activityViewModels()
+    val viewModel: FuzeViewModel by activityViewModels()
     private val adapter: AdapterMatches by lazy { AdapterMatches(::onItemClickListener) }
 
     override fun onCreateView(
