@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_item"
+        android:background="@color/background"
         tools:context=".ui.fragment.DetailsFragment">
 
         <ProgressBar
@@ -138,6 +138,7 @@
             app:layout_constraintStart_toEndOf="@+id/rv_player_one"
             app:layout_constraintTop_toBottomOf="@+id/txt_time_match"
             app:layout_constraintVertical_bias="0.0"
+            android:layout_marginBottom="12dp"
             tools:listitem="@layout/players_two_item" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -153,6 +154,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_time_match"
             app:layout_constraintVertical_bias="0.0"
+            android:layout_marginBottom="12dp"
             tools:listitem="@layout/players_one_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

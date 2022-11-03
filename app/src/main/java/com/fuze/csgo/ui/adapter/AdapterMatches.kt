@@ -45,33 +45,34 @@ class AdapterMatches(
 
             when(item.status) {
                 "not_started" -> {
-                    var textDrawable: Drawable? = date.background
-                    textDrawable = DrawableCompat.wrap(textDrawable!!)
-                    DrawableCompat.setTint(textDrawable, R.color.background_grey)
-                    date.background = textDrawable
-                    date.text = Utils.getDateTime(item.scheduled_at!!)
+                    setColorDate(date, Utils.getDateTime(item.scheduled_at!!).toString(), R.color.background_grey)
                 }
                 "running" -> {
-                    var textDrawable: Drawable? = date.background
-                    textDrawable = DrawableCompat.wrap(textDrawable!!)
-                    DrawableCompat.setTint(textDrawable, R.color.background_red)
-                    date.background = textDrawable
-                    date.text = "AGORA"
+                    setColorDate(date, "AGORA", R.color.background_red)
                 }
                 "started" -> {
-                    var textDrawable: Drawable? = date.background
-                    textDrawable = DrawableCompat.wrap(textDrawable!!)
-                    DrawableCompat.setTint(textDrawable, R.color.background_red)
-                    date.background = textDrawable
-                    date.text = "AGORA"
+                    setColorDate(date, "AGORA", R.color.background_red)
+                }
+                "finished" -> {
+                    setColorDate(date, "Cancelado", R.color.background_grey)
+                }
+                "canceled" -> {
+                    setColorDate(date, "Cancelado", R.color.background_red)
                 }
             }
             itemView.setOnClickListener {
                 onItemClickListener.invoke(item)
             }
         }
-    }
 
+        private fun setColorDate(dateView: View, value: String, rsId: Int) {
+            var textDrawable: Drawable? = dateView.background
+            textDrawable = DrawableCompat.wrap(textDrawable!!)
+            DrawableCompat.setTint(textDrawable, rsId)
+            dateView.background = textDrawable
+            date.text = value
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(
